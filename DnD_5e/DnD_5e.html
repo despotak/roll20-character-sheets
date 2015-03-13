@@ -7595,13 +7595,12 @@
 
             <!-- Hidden calcs to work out correct mod for finesse weapons -->
             <!-- OLD split calcs easier to read but come with performance issues.  Consolidated single calc below
-            <input type="hidden" name="attr_finesse_str_weight" value="(ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10)))" disabled="disabled">
-            <input type="hidden" name="attr_finesse_dex_weight" value="(ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10)))" disabled="disabled">
-            <input type="hidden" name="attr_finesse_tie_weight" value="(1 - @{finesse_str_weight} - @{finesse_dex_weight})" disabled="disabled">
-            <input type="hidden" name="attr_finesse_mod" value="((@{finesse_str_weight} * @{strength_mod}) + (@{finesse_dex_weight} * @{dexterity_mod}) + ((@{finesse_tie_weight}) * (@{strength_mod})))" disabled="disabled">
-            <input type="hidden" name="attr_finesse_mod" value="(((ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10))) * @{strength_mod}) + ((ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10))) * @{dexterity_mod}) + ((1 - (ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10))) - (ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10)))) * (@{strength_mod})))" disabled="disabled">-->
-            <!-- BEGIN AUTO GENERATED WEAPON SECTION -->
-
+        <input type="hidden" name="attr_finesse_str_weight" value="(ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10)))" disabled="disabled">
+        <input type="hidden" name="attr_finesse_dex_weight" value="(ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10)))" disabled="disabled">
+        <input type="hidden" name="attr_finesse_tie_weight" value="(1 - @{finesse_str_weight} - @{finesse_dex_weight})" disabled="disabled">
+        <input type="hidden" name="attr_finesse_mod" value="((@{finesse_str_weight} * @{strength_mod}) + (@{finesse_dex_weight} * @{dexterity_mod}) + ((@{finesse_tie_weight}) * (@{strength_mod})))" disabled="disabled">
+        <input type="hidden" name="attr_finesse_mod" value="(((ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10))) * @{strength_mod}) + ((ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10))) * @{dexterity_mod}) + ((1 - (ceil((@{strength_mod}/1e10) - (@{dexterity_mod}/1e10))) - (ceil((@{dexterity_mod}/1e10) - (@{strength_mod}/1e10)))) * (@{strength_mod})))" disabled="disabled">-->
+            <!-- MELEE WEAPONS -->
             <h4 class="sheet-center">Melee Weapons <span class="sheet-pictos">D</span></h4>
             <div class="sheet-row sheet-sub-header">
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Prof?</div>
@@ -7611,16 +7610,29 @@
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Magic Bonus</div>
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">To<br />Hit</div>
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Damage Dice</div>
-                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">+ stat?</div>
+                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">+<br />stat</div>
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Dmg<br />Bonus</div>
                 <div class="sheet-col-1-8 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Damage Type</div>
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Crit Dmg</div>
-                <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Crit on a</div>
-                <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Attack</div>
-            </div>	<!-- BEGIN melee weapon row -->
+                <div class="sheet-col-1-16 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Crit<br />on a</div>
+                <div class="sheet-col-1-16 sheet-center sheet-small-label sheet-vert-bottom">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Roll</div>
+            </div>
+
+            <!-- Melee weapon 1 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee1" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname1"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname1"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach1">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse1">
                     <input type="hidden" name="attr_meleeattackstat1" value="@{strength_mod}*(1-@{meleeattackfinesse1}) + @{dexterity_mod}*@{meleeattackfinesse1}" disabled="disabled">
@@ -7629,17 +7641,28 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit1" value="@{meleeattackstat1} + @{pbmelee1} + @{meleemagic1}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg1" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg1" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus1" value="(@{meleeattackstat1} * @{meleeattackstatdmg1}) + @{meleemagic1}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus1" value="(@{meleeattackstat1} * @{meleeattackstatdmg1}) + @{meleemagic1}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype1"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg1"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange1" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack1" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname1}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange1} + @{meleetohit1} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange1} + @{meleetohit1} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg1} + @{meleedmgbonus1} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype1}}} {{critdamage=Additional [[@{meleecritdmg1}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange1" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack1" value="@{output_option} &{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname1}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange1} + @{meleetohit1} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange1} + @{meleetohit1} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg1} + @{meleedmgbonus1} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype1}}} {{critdamage=Additional [[@{meleecritdmg1}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
-            <!-- BEGIN melee weapon row -->
+
+            <!-- Melee weapon 2 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee2" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname2"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname2"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach2">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse2">
                     <input type="hidden" name="attr_meleeattackstat2" value="@{strength_mod}*(1-@{meleeattackfinesse2}) + @{dexterity_mod}*@{meleeattackfinesse2}" disabled="disabled">
@@ -7648,17 +7671,28 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit2" value="@{meleeattackstat2} + @{pbmelee2} + @{meleemagic2}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg2" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg2" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus2" value="(@{meleeattackstat2} * @{meleeattackstatdmg2}) + @{meleemagic2}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus2" value="(@{meleeattackstat2} * @{meleeattackstatdmg2}) + @{meleemagic2}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype2"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg2"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange2" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack2" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname2}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange2} + @{meleetohit2} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange2} + @{meleetohit2} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg2} + @{meleedmgbonus2} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype2}}} {{critdamage=Additional [[@{meleecritdmg2}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg2"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange2" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack2" value="@{output_option} &{template:5eDefault} {{weapon=2}} {{title=@{meleeweaponname2}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange2} + @{meleetohit2} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange2} + @{meleetohit2} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg2} + @{meleedmgbonus2} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype2}}} {{critdamage=Additional [[@{meleecritdmg2}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
-            <!-- BEGIN melee weapon row -->
+
+            <!-- Melee weapon 3 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee3" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname3"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname3"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach3">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse3">
                     <input type="hidden" name="attr_meleeattackstat3" value="@{strength_mod}*(1-@{meleeattackfinesse3}) + @{dexterity_mod}*@{meleeattackfinesse3}" disabled="disabled">
@@ -7667,17 +7701,28 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit3" value="@{meleeattackstat3} + @{pbmelee3} + @{meleemagic3}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg3" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg3" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus3" value="(@{meleeattackstat3} * @{meleeattackstatdmg3}) + @{meleemagic3}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus3" value="(@{meleeattackstat3} * @{meleeattackstatdmg3}) + @{meleemagic3}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype3"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg3"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange3" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack3" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname3}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange3} + @{meleetohit3} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange3} + @{meleetohit3} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg3} + @{meleedmgbonus3} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype3}}} {{critdamage=Additional [[@{meleecritdmg3}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg3"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange3" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack3" value="@{output_option} &{template:5eDefault} {{weapon=3}} {{title=@{meleeweaponname3}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange3} + @{meleetohit3} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange3} + @{meleetohit3} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg3} + @{meleedmgbonus3} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype3}}} {{critdamage=Additional [[@{meleecritdmg3}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
-            <!-- BEGIN melee weapon row -->
+
+            <!-- Melee weapon 4 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee4" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname4"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname4"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach4">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse4">
                     <input type="hidden" name="attr_meleeattackstat4" value="@{strength_mod}*(1-@{meleeattackfinesse4}) + @{dexterity_mod}*@{meleeattackfinesse4}" disabled="disabled">
@@ -7686,17 +7731,28 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit4" value="@{meleeattackstat4} + @{pbmelee4} + @{meleemagic4}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg4" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg4" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus4" value="(@{meleeattackstat4} * @{meleeattackstatdmg4}) + @{meleemagic4}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus4" value="(@{meleeattackstat4} * @{meleeattackstatdmg4}) + @{meleemagic4}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype4"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg4"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange4" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack4" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname4}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange4} + @{meleetohit4} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange4} + @{meleetohit4} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg4} + @{meleedmgbonus4} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype4}}} {{critdamage=Additional [[@{meleecritdmg4}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg4"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange4" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack4" value="@{output_option} &{template:5eDefault} {{weapon=4}} {{title=@{meleeweaponname4}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange4} + @{meleetohit4} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange4} + @{meleetohit4} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg4} + @{meleedmgbonus4} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype4}}} {{critdamage=Additional [[@{meleecritdmg4}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
-            <!-- BEGIN melee weapon row -->
+
+            <!-- Melee weapon 5 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee5" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname5"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname5"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach5">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse5">
                     <input type="hidden" name="attr_meleeattackstat5" value="@{strength_mod}*(1-@{meleeattackfinesse5}) + @{dexterity_mod}*@{meleeattackfinesse5}" disabled="disabled">
@@ -7705,17 +7761,28 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit5" value="@{meleeattackstat5} + @{pbmelee5} + @{meleemagic5}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg5" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg5" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus5" value="(@{meleeattackstat5} * @{meleeattackstatdmg5}) + @{meleemagic5}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus5" value="(@{meleeattackstat5} * @{meleeattackstatdmg5}) + @{meleemagic5}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype5"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg5"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange5" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack5" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname5}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange5} + @{meleetohit5} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange5} + @{meleetohit5} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg5} + @{meleedmgbonus5} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype5}}} {{critdamage=Additional [[@{meleecritdmg5}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg5"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange5" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack5" value="@{output_option} &{template:5eDefault} {{weapon=5}} {{title=@{meleeweaponname5}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange5} + @{meleetohit5} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange5} + @{meleetohit5} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg5} + @{meleedmgbonus5} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype5}}} {{critdamage=Additional [[@{meleecritdmg5}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
-            <!-- BEGIN melee weapon row -->
+
+            <!-- Melee weapon 6 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee6" checked="checked"></div>
-                <div class="sheet-col-5-24"><input type="text" name="attr_meleeweaponname6"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname6"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach6">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
                 <div class="sheet-col-1-24 sheet-checkbox-row">
                     <input type="checkbox" value="1" name="attr_meleeattackfinesse6">
                     <input type="hidden" name="attr_meleeattackstat6" value="@{strength_mod}*(1-@{meleeattackfinesse6}) + @{dexterity_mod}*@{meleeattackfinesse6}" disabled="disabled">
@@ -7724,171 +7791,465 @@
                 <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit6" value="@{meleeattackstat6} + @{pbmelee6} + @{meleemagic6}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg6" value="0"></div>
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg6" checked="checked"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_meleedmgbonus6" value="(@{meleeattackstat6} * @{meleeattackstatdmg6}) + @{meleemagic6}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus6" value="(@{meleeattackstat6} * @{meleeattackstatdmg6}) + @{meleemagic6}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype6"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_meleecritdmg6"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input type="number" name="attr_meleeweaponcritrange6" value="20" step="1"></div>
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack6" value="&{template:5eDefault} {{weapon=1}} {{title=@{meleeweaponname6}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange6} + @{meleetohit6} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange6} + @{meleetohit6} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg6} + @{meleedmgbonus6} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype6}}} {{critdamage=Additional [[@{meleecritdmg6}]] damage}} @{classactionmeleeweapon}}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg6"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange6" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack6" value="@{output_option} &{template:5eDefault} {{weapon=6}} {{title=@{meleeweaponname6}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange6} + @{meleetohit6} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange6} + @{meleetohit6} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg6} + @{meleedmgbonus6} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype6}}} {{critdamage=Additional [[@{meleecritdmg6}]] damage}} @{classactionmeleeweapon}}"></button></div>
             </div>
-            <!-- END melee weapon row -->
+
+            <!-- Melee weapon 7 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee7" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname7"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach7">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_meleeattackfinesse7">
+                    <input type="hidden" name="attr_meleeattackstat7" value="@{strength_mod}*(1-@{meleeattackfinesse7}) + @{dexterity_mod}*@{meleeattackfinesse7}" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_meleemagic7" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit7" value="@{meleeattackstat7} + @{pbmelee7} + @{meleemagic7}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg7" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg7" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus7" value="(@{meleeattackstat7} * @{meleeattackstatdmg7}) + @{meleemagic7}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype7"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg7"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange7" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack7" value="@{output_option} &{template:5eDefault} {{weapon=7}} {{title=@{meleeweaponname7}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange7} + @{meleetohit7} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange7} + @{meleetohit7} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg7} + @{meleedmgbonus7} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype7}}} {{critdamage=Additional [[@{meleecritdmg7}]] damage}} @{classactionmeleeweapon}}"></button></div>
+            </div>
+
+            <!-- Melee weapon 8 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee8" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname8"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach8">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_meleeattackfinesse8">
+                    <input type="hidden" name="attr_meleeattackstat8" value="@{strength_mod}*(1-@{meleeattackfinesse8}) + @{dexterity_mod}*@{meleeattackfinesse8}" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_meleemagic8" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit8" value="@{meleeattackstat8} + @{pbmelee8} + @{meleemagic8}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg8" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg8" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus8" value="(@{meleeattackstat8} * @{meleeattackstatdmg8}) + @{meleemagic8}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype8"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg8"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange8" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack8" value="@{output_option} &{template:5eDefault} {{weapon=8}} {{title=@{meleeweaponname8}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange8} + @{meleetohit8} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange8} + @{meleetohit8} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg8} + @{meleedmgbonus8} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype8}}} {{critdamage=Additional [[@{meleecritdmg8}]] damage}} @{classactionmeleeweapon}}"></button></div>
+            </div>
+
+            <!-- Melee weapon 9 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee9" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname9"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach9">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_meleeattackfinesse9">
+                    <input type="hidden" name="attr_meleeattackstat9" value="@{strength_mod}*(1-@{meleeattackfinesse9}) + @{dexterity_mod}*@{meleeattackfinesse9}" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_meleemagic9" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit9" value="@{meleeattackstat9} + @{pbmelee9} + @{meleemagic9}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg9" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg9" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus9" value="(@{meleeattackstat9} * @{meleeattackstatdmg9}) + @{meleemagic9}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype9"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg9"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange9" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack9" value="@{output_option} &{template:5eDefault} {{weapon=9}} {{title=@{meleeweaponname9}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange9} + @{meleetohit9} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange9} + @{meleetohit9} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg9} + @{meleedmgbonus9} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype9}}} {{critdamage=Additional [[@{meleecritdmg9}]] damage}} @{classactionmeleeweapon}}"></button></div>
+            </div>
+
+            <!-- Melee weapon 10 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbmelee10" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_meleeweaponname10"></div>
+                <div class="sheet-col-1-12" title="Choose weapon reach">
+                    <select name="attr_meleeweaponreach10">
+                        <option value="5 ft.">5 ft.</option>
+                        <option value="10 ft.">10 ft.</option>
+                        <option value="15 ft.">15 ft.</option>
+                        <option value="20 ft.">20 ft.</option>
+                        <option value="25 ft.">25 ft.</option>
+                        <option value="30 ft.">30 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_meleeattackfinesse10">
+                    <input type="hidden" name="attr_meleeattackstat10" value="@{strength_mod}*(1-@{meleeattackfinesse10}) + @{dexterity_mod}*@{meleeattackfinesse10}" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_meleemagic10" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleetohit10" value="@{meleeattackstat10} + @{pbmelee10} + @{meleemagic10}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_meleedmg10" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_meleeattackstatdmg10" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_meleedmgbonus10" value="(@{meleeattackstat10} * @{meleeattackstatdmg10}) + @{meleemagic10}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_meleedmgtype10"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_meleecritdmg10"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_meleeweaponcritrange10" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr sheet-small-label">&nbsp;</div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_MeleeAttack10" value="@{output_option} &{template:5eDefault} {{weapon=10}} {{title=@{meleeweaponname10}}} {{subheader=@{character_name}}} {{subheaderright=Melee attack}} {{attack=[[1d20cs>@{meleeweaponcritrange10} + @{meleetohit10} + (@{global_melee_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{meleeweaponcritrange10} + @{meleetohit10} + (@{global_melee_attack_bonus}) ]]}} {{damage=[[@{meleedmg10} + @{meleedmgbonus10} + (@{global_melee_damage_bonus})  + 0d0]] @{meleedmgtype10}}} {{critdamage=Additional [[@{meleecritdmg10}]] damage}} @{classactionmeleeweapon}}"></button></div>
+            </div>
+
+            <!-- RANGED WEAPONS -->
             <h4 class="sheet-center">Ranged Weapons <span class="sheet-pictos">e</span></h4>
             <div class="sheet-row sheet-sub-header">
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Prof?</div>
-                <div class="sheet-col-1-18 sheet-center sheet-small-label sheet-vert-bottom">Ammo</div>
                 <div class="sheet-col-1-6 sheet-center sheet-small-label sheet-vert-bottom">Weapon</div>
-                <div class="sheet-col-1-9 sheet-center sheet-small-label sheet-vert-bottom">Type</div>
+                <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Range</div>
+                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Thrown</div>
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Magic Bonus</div>
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">To<br />Hit</div>
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Damage Dice</div>
+                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">+<br />stat</div>
                 <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Dmg<br />Bonus</div>
                 <div class="sheet-col-1-8 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Damage Type</div>
                 <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Crit Dmg</div>
-                <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Crit on a</div>
-
-                <div class="sheet-col-1-12 sheet-center sheet-small-label sheet-vert-bottom">Attack</div>
+                <div class="sheet-col-1-16 sheet-center sheet-small-label sheet-vert-bottom sheet-padr">Crit<br />on a</div>
+                <div class="sheet-col-1-16 sheet-center sheet-small-label sheet-vert-bottom">Ammo</div>
+                <div class="sheet-col-1-24 sheet-center sheet-small-label sheet-vert-bottom">Roll</div>
             </div>
 
-            <!-- BEGIN ranged weapon row -->
+            <!-- Ranged weapon 1 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged1" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo1" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname1"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype1">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname1"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange1">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown1">
+                    <input type="hidden" name="attr_rangedattackstat1" value="@{strength_mod}*@{rangedattackthrown1} + @{dexterity_mod}*(1-@{rangedattackthrown1})" disabled="disabled">
                 </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic1" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit1" value="@{rangedtype1} + @{pbranged1} + @{rangedmagic1}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit1" value="@{rangedattackstat1} + @{pbranged1} + @{rangedmagic1}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg1" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus1" value="@{rangedtype1} + @{rangedmagic1}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg1" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus1" value="(@{rangedattackstat1} * @{rangedattackstatdmg1}) + @{rangedmagic1}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype1"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg1"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange1" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack1" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname1}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange1} + @{rangedtohit1} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange1} + @{rangedtohit1} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg1} + @{rangeddmgbonus1} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype1}}} {{critdamage=Additional [[@{rangedcritdmg1}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange1" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo1" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack1" value="@{output_option} &{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname1}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange1} + @{rangedtohit1} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange1} + @{rangedtohit1} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg1} + @{rangeddmgbonus1} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype1}}} {{critdamage=Additional [[@{rangedcritdmg1}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
-            <!-- BEGIN ranged weapon row -->
+
+            <!-- Ranged weapon 2 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged2" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo2" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname2"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype2">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname2"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange2">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown2">
+                    <input type="hidden" name="attr_rangedattackstat2" value="@{strength_mod}*@{rangedattackthrown2} + @{dexterity_mod}*(1-@{rangedattackthrown2})" disabled="disabled">
                 </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic2" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit2" value="@{rangedtype2} + @{pbranged2} + @{rangedmagic2}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit2" value="@{rangedattackstat2} + @{pbranged2} + @{rangedmagic2}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg2" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus2" value="@{rangedtype2} + @{rangedmagic2}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg2" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus2" value="(@{rangedattackstat2} * @{rangedattackstatdmg2}) + @{rangedmagic2}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype2"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg2"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange2" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack2" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname2}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange2} + @{rangedtohit2} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange2} + @{rangedtohit2} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg2} + @{rangeddmgbonus2} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype2}}} {{critdamage=Additional [[@{rangedcritdmg2}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg2"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange2" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo2" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack2" value="@{output_option} &{template:5eDefault} {{weapon=2}} {{title=@{rangedweaponname2}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange2} + @{rangedtohit2} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange2} + @{rangedtohit2} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg2} + @{rangeddmgbonus2} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype2}}} {{critdamage=Additional [[@{rangedcritdmg2}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
-            <!-- BEGIN ranged weapon row -->
+
+            <!-- Ranged weapon 3 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged3" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo3" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname3"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype3">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname3"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange3">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown3">
+                    <input type="hidden" name="attr_rangedattackstat3" value="@{strength_mod}*@{rangedattackthrown3} + @{dexterity_mod}*(1-@{rangedattackthrown3})" disabled="disabled">
                 </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic3" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit3" value="@{rangedtype3} + @{pbranged3} + @{rangedmagic3}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit3" value="@{rangedattackstat3} + @{pbranged3} + @{rangedmagic3}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg3" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus3" value="@{rangedtype3} + @{rangedmagic3}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg3" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus3" value="(@{rangedattackstat3} * @{rangedattackstatdmg3}) + @{rangedmagic3}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype3"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg3"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange3" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack3" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname3}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange3} + @{rangedtohit3} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange3} + @{rangedtohit3} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg3} + @{rangeddmgbonus3} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype3}}} {{critdamage=Additional [[@{rangedcritdmg3}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg3"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange3" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo3" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack3" value="@{output_option} &{template:5eDefault} {{weapon=3}} {{title=@{rangedweaponname3}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange3} + @{rangedtohit3} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange3} + @{rangedtohit3} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg3} + @{rangeddmgbonus3} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype3}}} {{critdamage=Additional [[@{rangedcritdmg3}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
-            <!-- BEGIN ranged weapon row -->
+
+            <!-- Ranged weapon 4 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged4" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo4" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname4"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype4">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname4"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange4">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown4">
+                    <input type="hidden" name="attr_rangedattackstat4" value="@{strength_mod}*@{rangedattackthrown4} + @{dexterity_mod}*(1-@{rangedattackthrown4})" disabled="disabled">
                 </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic4" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit4" value="@{rangedtype4} + @{pbranged4} + @{rangedmagic4}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit4" value="@{rangedattackstat4} + @{pbranged4} + @{rangedmagic4}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg4" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus4" value="@{rangedtype4} + @{rangedmagic4}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg4" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus4" value="(@{rangedattackstat4} * @{rangedattackstatdmg4}) + @{rangedmagic4}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype4"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg4"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange4" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack4" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname4}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange4} + @{rangedtohit4} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange4} + @{rangedtohit4} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg4} + @{rangeddmgbonus4} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype4}}} {{critdamage=Additional [[@{rangedcritdmg4}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg4"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange4" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo4" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack4" value="@{output_option} &{template:5eDefault} {{weapon=4}} {{title=@{rangedweaponname4}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange4} + @{rangedtohit4} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange4} + @{rangedtohit4} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg4} + @{rangeddmgbonus4} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype4}}} {{critdamage=Additional [[@{rangedcritdmg4}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
-            <!-- BEGIN ranged weapon row -->
+
+            <!-- Ranged weapon 5 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged5" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo5" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname5"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype5">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname5"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange5">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown5">
+                    <input type="hidden" name="attr_rangedattackstat5" value="@{strength_mod}*@{rangedattackthrown5} + @{dexterity_mod}*(1-@{rangedattackthrown5})" disabled="disabled">
                 </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic5" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit5" value="@{rangedtype5} + @{pbranged5} + @{rangedmagic5}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit5" value="@{rangedattackstat5} + @{pbranged5} + @{rangedmagic5}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg5" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus5" value="@{rangedtype5} + @{rangedmagic5}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg5" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus5" value="(@{rangedattackstat5} * @{rangedattackstatdmg5}) + @{rangedmagic5}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype5"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg5"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange5" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack5" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname5}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange5} + @{rangedtohit5} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange5} + @{rangedtohit5} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg5} + @{rangeddmgbonus5} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype5}}} {{critdamage=Additional [[@{rangedcritdmg5}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg5"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange5" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo5" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack5" value="@{output_option} &{template:5eDefault} {{weapon=5}} {{title=@{rangedweaponname5}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange5} + @{rangedtohit5} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange5} + @{rangedtohit5} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg5} + @{rangeddmgbonus5} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype5}}} {{critdamage=Additional [[@{rangedcritdmg5}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
-            <!-- BEGIN ranged weapon row -->
+
+            <!-- Ranged weapon 6 row -->
             <div class="sheet-row">
                 <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged6" checked="checked"></div>
-                <div class="sheet-col-1-18"><input type="number" name="attr_rangedammo6" value="1"></div>
-                <div class="sheet-col-1-6"><input type="text" name="attr_rangedweaponname6"></div>
-                <div class="sheet-col-1-9" title="Choose either normal or thrown">
-                    <select name="attr_rangedtype6">
-                        <option value="@{dexterity_mod}">Normal</option>
-                        <option value="@{strength_mod}">Thrown</option>
-                        <option value="@{finesse_mod}">Thrown(finesse)</option>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname6"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange6">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
                     </select>
                 </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown6">
+                    <input type="hidden" name="attr_rangedattackstat6" value="@{strength_mod}*@{rangedattackthrown6} + @{dexterity_mod}*(1-@{rangedattackthrown6})" disabled="disabled">
+                </div>
                 <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic6" value="0" step="1"></div>
-                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit6" value="@{rangedtype6} + @{pbranged6} + @{rangedmagic6}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit6" value="@{rangedattackstat6} + @{pbranged6} + @{rangedmagic6}" disabled="disabled"></div>
                 <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg6" value="0"></div>
-                <div class="sheet-col-1-24"><input type="number" name="attr_rangeddmgbonus6" value="@{rangedtype6} + @{rangedmagic6}" disabled="disabled"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg6" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus6" value="(@{rangedattackstat6} * @{rangedattackstatdmg6}) + @{rangedmagic6}" disabled="disabled"></div>
                 <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype6"></div>
-                <div class="sheet-col-1-12"><input class="sheet-center" type="text" name="attr_rangedcritdmg6"></div>
-                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange6" value="20" step="1"></div>
-
-                <div class="sheet-col-1-12 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack6" value="&{template:5eDefault} {{weapon=1}} {{title=@{rangedweaponname6}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange6} + @{rangedtohit6} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange6} + @{rangedtohit6} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg6} + @{rangeddmgbonus6} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype6}}} {{critdamage=Additional [[@{rangedcritdmg6}]] damage}} @{classactionrangedweapon}">Attack</button></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg6"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange6" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo6" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack6" value="@{output_option} &{template:5eDefault} {{weapon=6}} {{title=@{rangedweaponname6}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange6} + @{rangedtohit6} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange6} + @{rangedtohit6} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg6} + @{rangeddmgbonus6} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype6}}} {{critdamage=Additional [[@{rangedcritdmg6}]] damage}} @{classactionrangedweapon}"></button></div>
             </div>
-            <!-- END ranged weapon row -->
+
+            <!-- Ranged weapon 7 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged7" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname7"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange7">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown7">
+                    <input type="hidden" name="attr_rangedattackstat7" value="@{strength_mod}*@{rangedattackthrown7} + @{dexterity_mod}*(1-@{rangedattackthrown7})" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic7" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit7" value="@{rangedattackstat7} + @{pbranged7} + @{rangedmagic7}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg7" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg7" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus7" value="(@{rangedattackstat7} * @{rangedattackstatdmg7}) + @{rangedmagic7}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype7"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg7"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange7" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo7" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack7" value="@{output_option} &{template:5eDefault} {{weapon=7}} {{title=@{rangedweaponname7}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange7} + @{rangedtohit7} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange7} + @{rangedtohit7} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg7} + @{rangeddmgbonus7} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype7}}} {{critdamage=Additional [[@{rangedcritdmg7}]] damage}} @{classactionrangedweapon}"></button></div>
+            </div>
+
+            <!-- Ranged weapon 8 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged8" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname8"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange8">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown8">
+                    <input type="hidden" name="attr_rangedattackstat8" value="@{strength_mod}*@{rangedattackthrown8} + @{dexterity_mod}*(1-@{rangedattackthrown8})" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic8" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit8" value="@{rangedattackstat8} + @{pbranged8} + @{rangedmagic8}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg8" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg8" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus8" value="(@{rangedattackstat8} * @{rangedattackstatdmg8}) + @{rangedmagic8}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype8"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg8"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange8" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo8" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack8" value="@{output_option} &{template:5eDefault} {{weapon=8}} {{title=@{rangedweaponname8}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange8} + @{rangedtohit8} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange8} + @{rangedtohit8} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg8} + @{rangeddmgbonus8} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype8}}} {{critdamage=Additional [[@{rangedcritdmg8}]] damage}} @{classactionrangedweapon}"></button></div>
+            </div>
+
+            <!-- Ranged weapon 9 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged9" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname9"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange9">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown9">
+                    <input type="hidden" name="attr_rangedattackstat9" value="@{strength_mod}*@{rangedattackthrown9} + @{dexterity_mod}*(1-@{rangedattackthrown9})" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic9" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit9" value="@{rangedattackstat9} + @{pbranged9} + @{rangedmagic9}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg9" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg9" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus9" value="(@{rangedattackstat9} * @{rangedattackstatdmg9}) + @{rangedmagic9}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype9"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg9"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange9" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo9" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack9" value="@{output_option} &{template:5eDefault} {{weapon=9}} {{title=@{rangedweaponname9}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange9} + @{rangedtohit9} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange9} + @{rangedtohit9} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg9} + @{rangeddmgbonus9} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype9}}} {{critdamage=Additional [[@{rangedcritdmg9}]] damage}} @{classactionrangedweapon}"></button></div>
+            </div>
+
+            <!-- Ranged weapon 10 row -->
+            <div class="sheet-row">
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="@{PB}" name="attr_pbranged10" checked="checked"></div>
+                <div class="sheet-col-1-6 sheet-padr"><input type="text" name="attr_rangedweaponname10"></div>
+                <div class="sheet-col-1-12" title="Choose weapon range">
+                    <select name="attr_rangedweaponrange10">
+                        <option value="5/15 ft.">5/15 ft.</option>
+                        <option value="20/60 ft.">20/60 ft.</option>
+                        <option value="25/100 ft.">25/100 ft.</option>
+                        <option value="30/120 ft.">30/120 ft.</option>
+                        <option value="80/320 ft.">80/320 ft.</option>
+                        <option value="100/400 ft.">100/400 ft.</option>
+                        <option value="150/600 ft.">150/600 ft.</option>
+                    </select>
+                </div>
+                <div class="sheet-col-1-24 sheet-checkbox-row">
+                    <input type="checkbox" value="1" name="attr_rangedattackthrown10">
+                    <input type="hidden" name="attr_rangedattackstat10" value="@{strength_mod}*@{rangedattackthrown10} + @{dexterity_mod}*(1-@{rangedattackthrown10})" disabled="disabled">
+                </div>
+                <div class="sheet-col-1-12 sheet-padr" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_rangedmagic10" value="0" step="1"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangedtohit10" value="@{rangedattackstat10} + @{pbranged10} + @{rangedmagic10}" disabled="disabled"></div>
+                <div class="sheet-col-1-12" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input class="sheet-center" type="text" name="attr_rangeddmg10" value="0"></div>
+                <div class="sheet-col-1-24 sheet-checkbox-row"><input type="checkbox" value="1" name="attr_rangedattackstatdmg10" checked="checked"></div>
+                <div class="sheet-col-1-24 sheet-padr"><input type="number" name="attr_rangeddmgbonus10" value="(@{rangedattackstat10} * @{rangedattackstatdmg10}) + @{rangedmagic10}" disabled="disabled"></div>
+                <div class="sheet-col-1-8 sheet-padr"><input type="text" name="attr_rangeddmgtype10"></div>
+                <div class="sheet-col-1-12 sheet-padr"><input class="sheet-center" type="text" name="attr_rangedcritdmg10"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input class="sheet-center" type="number" name="attr_rangedweaponcritrange10" value="20" step="1"></div>
+                <div class="sheet-col-1-16 sheet-padr"><input type="number" name="attr_rangedammo10" value="1"></div>
+                <div class="sheet-col-1-24 sheet-center"><button type="roll" class="sheet-roll" name="roll_RangedAttack10" value="@{output_option} &{template:5eDefault} {{weapon=10}} {{title=@{rangedweaponname10}}} {{subheader=@{character_name}}} {{subheaderright=Ranged attack}} {{attack=[[1d20cs>@{rangedweaponcritrange10} + @{rangedtohit10} + (@{global_ranged_attack_bonus}) ]]}} {{attackadv=[[1d20cs>@{rangedweaponcritrange10} + @{rangedtohit10} + (@{global_ranged_attack_bonus}) ]]}} {{damage=[[@{rangeddmg10} + @{rangeddmgbonus10} + (@{global_ranged_damage_bonus})  + 0d0]] @{rangeddmgtype10}}} {{critdamage=Additional [[@{rangedcritdmg10}]] damage}} @{classactionrangedweapon}"></button></div>
+            </div>
+
             <hr />
 
-            <!-- END AUTO GENERATED WEAPON SECTION -->
         </div>
         <!--Spellbook-->
         <div class="sheet-section-spellbook">
